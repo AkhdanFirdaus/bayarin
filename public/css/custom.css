@@ -1,0 +1,86 @@
+/*Float Button*/
+.fltbtn {
+	position: fixed;
+	right: : 0;
+	bottom: 0;
+	margin-bottom: 40px;
+	margin-right: 40px;
+}
+
+/*Font*/
+.color-dark {
+	color: #2B4D59;
+}
+.color-green {
+	color: #39998E;
+}
+.color-yellow {
+	color: #FFDD7C;
+}
+.color-orange {
+	color: #FFAA67;
+}
+.color-red {
+	color: #DA674A;
+}
+
+/*SVG*/
+.yellow {
+    background-image: url('/svg/hero/yellow.svg');
+    background-size: cover;
+}
+.blue {
+    background-image: url('/svg/hero/blue.svg');
+    background-size: cover;
+}
+.red {
+    background-image: url('/svg/hero/red.svg');
+    background-size: cover;
+}
+.vh-100 {
+    height: 100vh;
+}
+
+/*BG*/
+/*Font*/
+.cusbg-dark {
+	background: #2B4D59;
+}
+.cusbg-green {
+	background: #39998E;
+}
+.cusbg-yellow {
+	background: #FFDD7C;
+}
+.cusbg-orange {
+	background: #FFAA67;
+}
+.cusbg-red {
+	background: #DA674A;
+}
+.bgl {
+    background-image: url('/img/cabinet-contemporary-cups-279618.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+.bgr {
+    background-image: url('/img/apartment-architecture-blue-sky-358636.jpg');
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+@media (max-width: 1440px) {
+    .responsif {
+        height: 100vh !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .responsif {
+        height: 100% !important;
+    }
+}

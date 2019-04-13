@@ -1,0 +1,1 @@
+<span class="yellow h3 font-weight-light d-block p-3 mb-2 rounded">{{ \Carbon\Carbon::now()->toFormattedDateString() }} <small class="h5">@yield('title')</small></span>
