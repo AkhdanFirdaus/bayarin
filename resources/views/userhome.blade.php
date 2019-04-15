@@ -101,7 +101,7 @@
                         <a href="{{ route('exitSess') }}" class="btn btn-danger btn-block py-3"><i class="fas fa-sign-out-alt fa-2x"></i></a>
                         <div class="d-flex justify-content-start mt-2 align-items-start">
                             <a href="javascript:void();" onclick="history.go(-1)" class="btn btn-primary d-block mr-1"><i class="fas fa-chevron-left fa-lg"></i></a>
-                            <a href="{{ route('cekNoKwh') }}" class="btn btn-primary d-block"><i class="fas fa-home fa-lg"></i></a>
+                            <a href="{{ route('cekNoKwh', ['no_kwh' => session('no_kwh'), '_token' => csrf_field()] ) }}" class="btn btn-primary d-block"><i class="fas fa-home fa-lg"></i></a>
                         </div>
                         @endif
                     </div>

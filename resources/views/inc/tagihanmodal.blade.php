@@ -81,10 +81,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <form>
-                    {{ csrf_field() }}
-                    <button type="submit" class="btn btn-danger" id="#btndel"><i class="fas fa-trash"></i></button>
-                </form>
+                <button type="submit" class="btn btn-danger" id="btndel"><i class="fas fa-trash"></i></button> 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -106,17 +103,18 @@ $(document).ready(function() {
                 type: "GET",
                 dataType: "json",
                 success: function(data) {
-                    let jumlah_meter = data.DATA.pelanggan.tarif.tarifperkwh * (data.DATA.meter_akhir - data.DATA.meter_awal);
+                    let jumlah_meter = Math.abs(data.DATA.meter_akhir - data.DATA.meter_awal);
+                    let totalbayar = data.DATA.pelanggan.tarif.tarifperkwh * (jumlah_meter);
                     $('#tahun').text(data.DATA.tahun);
-                    $('#jumlah_penggunaan').text(data.DATA.meter_akhir - data.DATA.meter_awal);
-                    $('#total').text(jumlah_meter);
+                    $('#jumlah_penggunaan').text(jumlah_meter);
+                    $('#total').text(totalbayar);
                     $('#atasnama').text(data.DATA.pelanggan.nama);
                     $('#tarif').text(data.DATA.pelanggan.tarif.tarifperkwh);
 
                     $('[name="pelanggan_id"]').val(data.DATA.pelanggan_id);
                     $('[name="bulan"]').val(data.DATA.bulan);
                     $('[name="tahun"]').val(data.DATA.tahun);
-                    $('[name="jumlah_meter"]').val(data.DATA.meter_akhir - data.DATA.meter_awal);
+                    $('[name="jumlah_meter"]').val(jumlah_meter);
                 }
             });
         }
@@ -134,12 +132,14 @@ $(document).ready(function() {
 
     $('#btndel').on('click', function () {
         var id = $('#tagihanno').text();
-        $.$.ajax({
-            url: "{!! route('tagihan.destroy') !!}",
-            type: 'POST',
-            dataType: 'json',
-            data: {id: 'id', _method: 'DELETE'},
+        var token = $("meta[name='csrf-token']").attr("content");
+        $.ajax({            
+            type: 'DELETE',
+            dataType: 'JSON',
+            data: {_token: token},
+            url: "tagihan/" + id,
             success: function (data) {
+                $('.item' + data['id']).remove();
                 $('tagihanItemModal').modal('hide');
                 $('.toast').toast('show');
                 $('.toast-body').text("Berhasil menghapus tagihan no "+id);

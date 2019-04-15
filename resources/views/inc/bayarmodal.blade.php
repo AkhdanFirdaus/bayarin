@@ -193,6 +193,8 @@ $kode = \Faker\Factory::create()->ean8;
 <div class="modal fade" id="modalPerTagihan" tabindex="-1" role="dialog" aria-labelledby="modalPerTagihanTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
+            <form action="{{ route('pembayaran.bayarpertagihan', $pelanggan->no_kwh) }}" method="POST">
+            {{ csrf_field() }}
             <div class="modal-header">
                 <h5 class="modal-title" id="modalPerTagihanTitle">Bayar per Tagihan</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -222,41 +224,48 @@ $kode = \Faker\Factory::create()->ean8;
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        @php
-                        $bulan = \Carbon\Carbon::now()->format("M");
-                        $tanggal = \Carbon\Carbon::now()->toDateTimeString();
-                        @endphp
-                        <input type="hidden" name="tgl_bayar" value="{{ $tanggal }}">
-                        <div class="form-group">
-                            <span class="badge badge-info">Bulan</span>
-                            <span class="yellow p-2 d-block bln">{{ $bulan }}</span>
-                            <input type="hidden" name="bln_bayar" value="{{ $bulan }}">
+                    <div class="col-md-6">                            
+                        <input type="hidden" name="tagihan_id">
+                        <input type="hidden" name="pelanggan_id" value="{{ $pelanggan->id }}">
+                        <input type="hidden" name="tanggal_pembayaran" value="{{ $tanggal }}">
+                        <div class="row">
+                            <dl class="col-6">
+                                <dd class="badge badge-info">Kode Transaksi</dd>
+                                <dt class="red p-2 d-block">{{ $kode }}</dt>
+                                <input type="hidden" name="bulan_bayar" value="{{ $bulan }}">
+                            </dl>
+                            <dl class="col-6">
+                                <dd class="badge badge-info">Bulan</dd>
+                                <dt class="yellow p-2 d-block bln">{{ $tgl }}</dt>
+                                <input type="hidden" name="bulan_bayar" value="{{ $bulan }}">
+                            </dl>                                
                         </div>
-                        <div class="form-row">
-                            <div class="col">
-                                <span class="badge badge-info">Total Pembayaran Pemakaian</span>
-                                <span class="yellow p-2 d-block ttl"></span>
-                            </div>
-                            <div class="col">
-                                <span class="badge badge-info">Biaya administrasi</span>
-                                <span class="yellow p-2 d-block adm"></span>
-                                <input type="hidden" name="biaya_adm">
-                            </div>
+                        <div class="row">
+                            <dl class="col-6">
+                                <dd class="badge badge-info">Total Pembayaran Pemakaian</dd>
+                                <dt class="yellow p-2 d-block ttl"></dt>
+                            </dl>
+                            <dl class="col-6">
+                                <dd class="badge badge-info">Biaya administrasi</dd>
+                                <dt class="yellow p-2 d-block adm"></dt>
+                                <input type="hidden" name="biaya_admin">
+                            </dl>
                         </div>
-                        <div class="form-group">
-                            <span class="badge badge-info">Total Pembayaran</span>
-                            <span class="yellow p-2 d-block ttl_byr"></span>
-                            <input type="hidden" name="ttl_byr">
-                        </div>
-                        <input type="hidden" name="mtd">
+                        <dl>
+                            <dd class="badge badge-info">Total Pembayaran</dd>
+                            <dt class="yellow p-2 d-block"><span class="ttl_byrs"></span></dt>
+                            <input type="hidden" name="total_bayar">
+                        </dl>
+                        <input type="hidden" name="metode" value="Transfer">
+                        <input type="hidden" name="kode" value="{{ $kode }}">
                     </div>
-                </div>
+                </div>  
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Bayar</button>
+                <button type="submit" class="btn btn-primary" id="btnbayarpertagihan">Bayar</button>
             </div>
+            </form>
         </div>
     </div>
 </div>

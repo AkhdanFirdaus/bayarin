@@ -38,19 +38,21 @@
 					<tr>
 						<th>#</th>
 						<th>Bulan/Tahun</th>
+						<th>Status</th>
 						<th>Nomor Kwh</th>
 						<th>Daya Rumah</th>
 						<th>Nama</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($tagihans->where('status', 'Belum Bayar') as $index => $tagihan)
+					@foreach($tagihans as $index => $tagihan)
 					<tr>
 						<th>{{ $index+1 }}</th>
 						<td>{{ $tagihan->bulan.'/'.$tagihan->tahun }}</td>
+						<td>{{ $tagihan->status }}</td>
 						<td>{{ $tagihan->pelanggan->no_kwh }}</td>
-						<td>{{ $tagihan->jumlah_meter * $tagihan->pelangan->tarif->daya }}</td>
-						<td>{{ $tagihan->pelanggan->nama }}</td>						
+						<td>{{ $tagihan->pelanggan->tarif->daya }} VA</td>
+						<td>{{ $tagihan->pelanggan->nama }}</td>
 					</tr>
 					@endforeach
 				</tbody>

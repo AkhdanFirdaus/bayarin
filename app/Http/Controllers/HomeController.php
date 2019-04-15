@@ -10,6 +10,7 @@ use App\Tagihan;
 use App\Tarif;
 use Auth;
 use Faker;
+use Session;
 
 class HomeController extends Controller
 {
@@ -45,10 +46,10 @@ class HomeController extends Controller
     }
     public function verifbank($id)
     {
-        $tagihan = Tagihan::all();
+        $tagihan = Tagihan::where('status', 'Konfirmasi');
         $pembayaran = Pembayaran::find($id);
         $pembayaran->update(['admin_id' => Auth::user()->id]);
-        $tagihan->where('status', 'Konfirmasi')->update(['status', 'Lunas']);
+        $tagihan->update(['status' => 'Lunas']);
         Session::flash('msg', 'Berhasil Verif');
         return redirect()->back();
     }

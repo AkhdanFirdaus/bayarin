@@ -16,7 +16,7 @@ class PDFController extends Controller
 {
     public function __construct()
     {
-    	return $this->middleware('admin');
+    	return $this->middleware('admin')->except('reportPembayaranID');
     }
 
     public function reportPelanggan(Request $request)
@@ -46,7 +46,7 @@ class PDFController extends Controller
     public function reportPembayaranID(Request $request, $id)
     {
         $pembayaran = Pembayaran::find($id);
-        view()->share(['pembayaran' => $pembayaran, 'request' => $request]);
+        view()->share(['pembayaran' => $pembayaran]);
         $pdf = PDF::loadHTML(View::make('report.reportPembayaranID'))->setPaper('A4', 'potrait');
         return $pdf->stream();
     }

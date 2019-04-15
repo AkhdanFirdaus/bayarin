@@ -19,4 +19,9 @@ class Pembayaran extends Model
 	{
 		return $this->belongsTo('App\Pelanggan');
 	}
+
+	public function admin()
+	{
+		return $this->belongsTo('App\User', 'admin_id');
+	}
 }

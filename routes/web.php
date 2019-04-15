@@ -17,6 +17,7 @@ Route::post('{no_kwh}/pembayaran', 'Controller@bayarform')->name('bayarform');
 Route::post('{no_kwh}/pembayaran/bayarSemua', 'PembayaranController@store')->name('pembayaran.bayarSemua');
 Route::post('{no_kwh}/pembayaran/bayarBank', 'PembayaranController@bayarBank')->name('pembayaran.bayarBank');
 Route::post('{no_kwh}/pembayaran/bayarTunai', 'PembayaranController@bayarTunai')->name('pembayaran.bayarTunai');
+Route::post('{no_kwh}/pembayaran/btnbayarpertagihan', 'PembayaranController@bayarPerTagihan')->name('pembayaran.bayarpertagihan');
 Route::post('{no_kwh}/riwayatbayar', 'Controller@riwayatbayar')->name('riwayatbayar');
 Route::get('exitSess', 'Controller@exitSession')->name('exitSess');
 
@@ -26,12 +27,15 @@ Route::post('/loginuser', 'Auth\UserLoginController@login');
 Route::get('/registeruser', 'Auth\UserRegisterController@showUserRegistrationForm')->name('registeruser.show');
 Route::post('/registeruser', 'Auth\UserRegisterController@register')->name('registeruser.store');
 
+// userreport
+Route::post('report/pembayaran/{id}', 'PDFController@reportPembayaranID')->name('reportPembayaranID');
+
 Auth::routes();
 
 Route::group(['middleware' => 'admin'], function () {
 	Route::get('/home', 'HomeController@index')->name('home');
 
-	Route::post('verif/pembayaran/{id}', 'HomeController@verifbank')->name('verifbank');
+	Route::put('verif/pembayaran/{id}', 'HomeController@verifbank')->name('verifbank');
 
 	Route::resource('pelanggan', 'PelangganController');
 	Route::get('pelanggan/{nama}/penggunaan', 'PelangganController@dataPenggunaan')->name('dataPenggunaan');
@@ -48,8 +52,7 @@ Route::group(['middleware' => 'admin'], function () {
 Route::group(['prefix' => '/report', 'middleware' => 'admin'], function () {
 	Route::post('pelanggan', 'PDFController@reportPelanggan')->name('reportPelanggan');
 	Route::post('penggunaan', 'PDFController@reportPenggunaan')->name('reportPenggunaan');
-	Route::post('pembayaran', 'PDFController@reportPembayaran')->name('reportPembayaran');
-	Route::post('pembayaran/{id}', 'PDFController@reportPembayaranID')->name('reportPembayaranID');
+	Route::post('pembayarans', 'PDFController@reportPembayaran')->name('reportPembayaran');
 	Route::post('tagihan', 'PDFController@reportTagihan')->name('reportTagihan');
 	Route::post('tarif', 'PDFController@reportTarif')->name('reportTarif');
 });

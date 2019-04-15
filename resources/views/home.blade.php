@@ -58,13 +58,13 @@
                                 <div class="d-block">
                                     <i class="fas fa-exclamation-triangle fa-2x"></i>
                                 </div>                                
-                                <span class="badge badge-warning">{{ $tagihan->where('status', 'Belum Bayar')->count() }}</span>
+                                <span class="badge badge-warning">{{ $tagihan->where('status', 'Konfirmasi')->count() }}</span>
                             </div>
                             <div class="col text-success">
                                 <div class="d-block">
                                     <i class="fas fa-check fa-2x"></i>
                                 </div>                                
-                                <span class="badge badge-success">{{ $tagihan->where('status', 'Belum Bayar')->count() }}</span>
+                                <span class="badge badge-success">{{ $tagihan->where('status', 'Lunas')->count() }}</span>
                             </div>
                         </div>
                         <hr>

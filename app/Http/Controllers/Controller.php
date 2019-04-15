@@ -28,8 +28,10 @@ class Controller extends BaseController
 
     public function cekNoKwh(Request $request)
     {
-        Session::put('no_kwh', $request->no_kwh);
+        Session::put('no_kwh', $request->no_kwh);        
     	$pelanggan = Pelanggan::where('no_kwh', $request->no_kwh)->first();
+
+        Session::put('nama', $pelanggan->nama);
 
         if ($pelanggan == null) {
             Session::flash('msg', 'Tidak ditemukan');

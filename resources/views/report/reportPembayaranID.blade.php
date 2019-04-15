@@ -18,14 +18,14 @@
 				<tbody>
 					<tr>
 						<td>Tanggal : {{ date('d-m-y') }}</td>
-						<td>{{ $request->user()->nama }}</td>						
+						<td>{{ session('nama') }}</td>						
 					</tr>
 					<tr>
 						<td>Data : Pelanggan</td>
-						<td>{{ $request->user()->level }}</td>
+						<td>&nbsp;</td>
 					</tr>
 					<tr>
-						<td>Tipe : Keseluruhan</td>
+						<td>Tipe : Pembayaran No. {{$pembayaran->id}}</td>
 						<td>&nbsp;</td>
 					</tr>	
 				</tbody>
@@ -36,23 +36,21 @@
 			<table width="100%">
 				<thead align="left">
 					<tr>
-						<th>#</th>
-						<th>Nama</th>
-						<th>Alamat</th>
-						<th>Daya Rumah</th>
-						<th>Nomor KWH</th>
+						<th>Tgl Pembayaran</th>
+						<th>Bulan Bayar</th>
+						<th>Total Bayar</th>
+						<th>Metode/Kode</th>
+						<th>Disahkan</th>
 					</tr>
 				</thead>
 				<tbody>
-{{-- 					@foreach($pelanggans as $index => $pelanggan) --}}
 					<tr>
-						<th>{{ $index+1 }}</th>
-						<td>{{ $pelanggan->nama }}</td>
-						<td>{{ $pelanggan->alamat }}</td>
-						<td>{{ $pelanggan->tarif->daya }}</td>
-						<td>{{ $pelanggan->no_kwh }}</td>
+						<td>{{ \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran)->toFormattedDateString() }}</td>
+						<td>{{ $pembayaran->bulan_bayar }}</td>
+						<td>Rp. {{ number_format(round($pembayaran->total_bayar, -3)) }}</td>
+						<td>{{ $pembayaran->metode.'/'.$pembayaran->kode }}</td>
+						<td>{{ $pembayaran->admin->nama }}</td>
 					</tr>
-					{{-- @endforeach --}}
 				</tbody>
 			</table>		
 		</section>

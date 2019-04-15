@@ -116,9 +116,20 @@ class PembayaranController extends Controller
         // }
     }
 
-    public function bayarTagihan($id)
+    public function bayarPerTagihan(Request $request)
     {
-                
+        $pembayaran = Pembayaran::create($request->all());
+        if ($pembayaran) {                        
+            $bayar = Pembayaran::find($pembayaran)->last();
+
+            Tagihan::where('id', $bayar->tagihan_id)->update(['status' => 'Konfirmasi']);
+
+            Session::flash('msg', 'Berhasil membayar');
+            view()->share(['bayar' => $bayar, 'request' => $request->all()]);
+            $pdf = PDF::loadHTML(View::make('report.bayarPerTagihan'))->setPaper('A4', 'potrait');
+            return $pdf->stream();
+        }
+        return redirect()->back();
     }
 
     public function bayarTunai(Request $request)

@@ -38,13 +38,20 @@ class ApiController extends Controller
     	$penggunaan->load(['pelanggan.tarif', 'tagihan']);
 
     	return response()->json(['DATA' => $penggunaan], 201);
+    }    
+
+    public function getTagihanAll()
+    {
+        $tagihan = \App\Tagihan::all();
+        $tagihan->load('pelanggan.tarif');
+        return response()->json(['DATA' => $tagihan], 201);
     }
 
     public function getTagihan($id)
     {
 
-    	$tagihan = \App\Tagihan::find($id);
-    	$tagihan->load('pelanggan.tarif');
-    	return response()->json(['DATA' => $tagihan], 201);
+        $tagihan = \App\Tagihan::find($id);
+        $tagihan->load('pelanggan.tarif');
+        return response()->json(['DATA' => $tagihan], 201);
     }
 }

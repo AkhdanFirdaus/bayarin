@@ -30,16 +30,16 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <i class="fas fa-dollar-sign fa-4x color-green"></i>
-                    <div class="ml-auto h3 pull-right">{{ $tagihans->where('status', 'Lunas')->sum('jumlah_meter') }}</div>
+                    <i class="fas fa-calculator fa-4x color-green"></i>
+                    <div class="ml-auto h2 pull-right">{{ $tagihans->where('status', 'Lunas')->sum('jumlah_meter') }} Kwh</div>
                 </div>                                
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="d-flex justify-content-between">
-                    <i class="fas fa-dollar-sign fa-4x color-red"></i>
-                    <div class="ml-auto display-4 pull-right">{{ $tagihans->where('status', 'Belum Bayar')->sum('jumlah_meter') }}</div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <i class="fas fa-calculator fa-4x color-red"></i>
+                    <div class="ml-auto h2 pull-right">{{ $tagihans->where('status', 'Belum Bayar')->sum('jumlah_meter') + $tagihans->where('status', 'Konfirmasi')->sum('jumlah_meter') }} Kwh</div>
                 </div>                                
             </div>
         </div>
@@ -59,19 +59,19 @@
             </thead>
             <tbody>
                 @foreach($tagihans as $index => $tagihan)
-                <tr>
+                <tr class="item{{$tagihan->id}}">
                     <td scope="col">{{ $index+1 }}</td>
                     <td scope="col">{{ $tagihan->pelanggan->nama }}</td>
                     <td scope="col">{{ $tagihan->bulan.'/'.$tagihan->tahun }}</td>
                     <td scope="col">{{ $tagihan->jumlah_meter }} Kwh</td>
                     <td scope="col">Rp. {{ number_format($tagihan->jumlah_meter * $tagihan->pelanggan->tarif->tarifperkwh) }}</td>
                     <td scope="col">
-                        @if($tagihan->status = 'Belum Bayar')
-                        <span class="badge badge-danger">Belum Bayar</span>
-                        @elseif($tagihan->status = 'Konfirmasi')
-                        <span class="badge badge-warning">Konfirmasi</span>
-                        @elseif($tagihan->status = 'Lunas')
+                        @if($tagihan->status == 'Lunas')
                         <span class="badge badge-success">Lunas</span>
+                        @elseif($tagihan->status == 'Konfirmasi')
+                        <span class="badge badge-warning">Konfirmasi</span>                        
+                        @elseif($tagihan->status == 'Belum Bayar')
+                        <span class="badge badge-danger">Belum Bayar</span>
                         @endif
                     </td>                    
                     <td scope="col">

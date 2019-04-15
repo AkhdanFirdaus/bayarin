@@ -42,7 +42,7 @@
                             <div class="col text-center">
                                 <span class="badge badge-danger">Jumlah Meter</span>
                                 <div class="d-block">
-                                    <span class="font-weight-bold h5">{{ $penggunaan->meter_akhir - $penggunaan->meter_awal }}</span>
+                                    <span class="font-weight-bold h5">{{ abs($penggunaan->meter_akhir - $penggunaan->meter_awal) }}</span>
                                 </div>
                             </div>
                         </div>

@@ -57,7 +57,3 @@
 </div>
 @include('inc.bayarmodal')
 @endsection
-
-@section('script')
-
-@endsection

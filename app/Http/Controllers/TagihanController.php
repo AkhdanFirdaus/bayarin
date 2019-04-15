@@ -85,9 +85,8 @@ class TagihanController extends Controller
      */
     public function destroy($id)
     {
-        dd($id);
-        Tagihan::find($id)->destroy($id);
-        Session::flash('msg', 'Sukses menghapus pelanggan');
-        return redirect()->route('tagihan.index');
+        $tagihan = Tagihan::find($id);
+        $tagihan->delete();
+        return response()->json($tagihan);
     }
 }

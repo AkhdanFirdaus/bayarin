@@ -44,8 +44,8 @@
                     <div class="form-group">               
                         <label for="meter_awal">Meter Awal</label>                        
                         @if($penggunaan)
-                        <span id="meter_awal" class="d-block yellow p-2">{{ $penggunaan->meter_awal }}</span>
-                        <input type="hidden" name="meter_awal" value="{{ $penggunaan->meter_awal }}">
+                        <span id="meter_awal" class="d-block yellow p-2">{{ $penggunaan->meter_akhir }}</span>
+                        <input type="hidden" name="meter_awal" value="{{ $penggunaan->meter_akhir }}">
                         @else
                         <input type="number" name="meter_awal" value="" class="form-control yellow">
                         @endif

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">        
-        <div class="col-md-4 yellow h-100 p-5">
+        <div class="col-md-4 yellow responsif p-5">
             <div class="container">                
                 <div class="text-center">
                     @include('inc.datetime')
@@ -11,37 +11,28 @@
                     <h3>{{ Auth::user()->nama }}</h3>
                     <p">{{ strtoupper(Auth::user()->level) }}</p>
                     <div class="d-block mb-2">
-                        <a class="btn btn-danger btn-lg" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger btn-lg"><i class="fas fa-sign-out-alt"></i></button>
+                        </form>
                     </div>
                 </div>
-                <!-- <div class="list-group font-weight-bold">                    
-                    <a id="lpembayaran" href="{{ route('tagihan.index') }}" class="list-group-item list-group-item-action d-flex align-items-center color-green">
-                        <i class="fas fa-money-bill-wave-alt fa-4x"></i>
-                        <span class="card-text p-4">Pembayaran</span>
-                    </a>
-                    <a id="ltagihan" href="{{ route('tarif.index') }}" class="list-group-item list-group-item-action d-flex align-items-center color-orange">
-                        <i class="fas fa-file-invoice-dollar fa-4x"></i>
-                        <span class="card-text p-4">Tagihan</span>
-                    </a>                    
-                </div> -->
                 <div class="list-group font-weight-bold">                    
-                    <a id="lpembayaran" href="#" class="list-group-item list-group-item-action d-flex align-items-center color-green">
+                    <a href="#dataPembayaran" class="list-group-item list-group-item-action d-flex align-items-center color-green" data-toggle="modal" data-target="#dataPembayaran">
                         <i class="fas fa-money-bill-wave-alt fa-4x"></i>
                         <span class="card-text p-4">Pembayaran</span>
                     </a>
-                    <a id="ltagihan" href="#" class="list-group-item list-group-item-action d-flex align-items-center color-orange">
+                    <a href="#dataTagihan" class="list-group-item list-group-item-action d-flex align-items-center color-orange"  data-toggle="modal" data-target="#dataTagihan">
                         <i class="fas fa-file-invoice-dollar fa-4x"></i>
                         <span class="card-text p-4">Tagihan</span>
                     </a>                    
                 </div>
             </div>
         </div>
-        <div class="col-md-8 bgr p-4 vh-100">            
+        <div class="col-md-8 bgr p-4 responsif">            
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card mb-2">
+                    <div class="card mb-2 text-center">
                         <div class="card-body">
                             <span class="display-4">{{ $pembayaran->count() }}</span>
                             <h5 class="card-title p-4">Pembayaran</h5>
@@ -67,15 +58,21 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="" class="btn btn-primary btn-block"><i class="fas fa-print"></i></a>
+                            <form method="POST" action="{{ route('reportPembayaran') }}">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-print"></i></button>
+                            </form>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card text-center">
                         <div class="card-body">
                             <span class="display-4">{{ $tagihan->count() }}</span>
                             <h5 class="card-title p-4">Tagihan</h5>
                             <hr>
-                            <a href="" class="btn btn-primary btn-block"><i class="fas fa-print"></i></a>
+                            <form method="POST" action="{{ route('reportTagihan') }}">
+                                {{ csrf_field() }}
+                                <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-print"></i></button>
+                            </form>
                         </div>
                     </div>                        
                 </div>
@@ -111,6 +108,7 @@
                                                 <div class="col-md-2">
                                                     <form action="{{ route('verifbank', $pemb->id) }}" method="POST">
                                                         {{ csrf_field() }}
+                                                        {{ method_field('PUT') }}
                                                         <button type="submit" class="btn btn-success"><i class="fas fa-check fa-2x text-white"></i></button>
                                                     </form>
                                                 </div>
@@ -132,4 +130,5 @@
         </div>
     </div>
 </div>
+@include('inc.bankmodal')
 @endsection

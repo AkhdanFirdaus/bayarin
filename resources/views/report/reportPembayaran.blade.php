@@ -21,7 +21,7 @@
 						<td>{{ $request->user()->nama }}</td>						
 					</tr>
 					<tr>
-						<td>Data : Pelanggan</td>
+						<td>Data : Pembayaran</td>
 						<td>{{ $request->user()->level }}</td>
 					</tr>
 					<tr>
@@ -38,19 +38,23 @@
 					<tr>
 						<th>#</th>
 						<th>Nama</th>
-						<th>Alamat</th>
-						<th>Daya Rumah</th>
-						<th>Nomor KWH</th>
+						<th>Tanggal Pembayaran</th>
+						<th>Bulan Bayar</th>
+						<th>Total Bayar</th>
+						<th>Metode</th>
+						<th>Status</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach($pelanggans as $index => $pelanggan)
+					@foreach($pembayarans as $index => $pembayaran)
 					<tr>
 						<th>{{ $index+1 }}</th>
-						<td>{{ $pelanggan->nama }}</td>
-						<td>{{ $pelanggan->alamat }}</td>
-						<td>{{ $pelanggan->tarif->daya }}</td>
-						<td>{{ $pelanggan->no_kwh }}</td>
+						<td>{{ $pembayaran->nama }}</td>
+						<td>{{ \Carbon\Carbon::parse($pembayaran->tanggal_pembayaran)->toFormattedDateString() }}</td>
+						<td>{{ $pembayaran->bulan_bayar }}</td>
+						<td>{{ number_format(round($pembayaran->total_bayar, -3)) }}</td>
+						<td>{{ $pembayaran->metode }}</td>						
+						<td>@if($pembayaran->admin_id != null) Lunas @else Konfirmasi @endif</td>
 					</tr>
 					@endforeach
 				</tbody>
