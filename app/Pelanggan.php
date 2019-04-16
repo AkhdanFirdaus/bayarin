@@ -35,13 +35,14 @@ class Pelanggan extends Authenticatable
 		return $this->hasMany('App\Pembayaran');
 	}
 
-	// public function boot()
- //    {
- //    	parent::boot();
+	public static function boot()
+    {
+    	parent::boot();
 
- //    	static::deleting(function ($pelanggan) {
- //    		$pelanggan->penggunaan->delete();
- //    		$pelanggan->tagihan->delete();
- //    	});
- //    }
+    	static::deleting(function ($pelanggan) {
+    		$pelanggan->penggunaan()->delete();
+    		$pelanggan->tagihan()->delete();
+    		$pelanggan->pembayaran()->delete();
+    	});
+    }
 }

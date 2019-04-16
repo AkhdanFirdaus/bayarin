@@ -140,7 +140,7 @@ $(document).ready(function() {
             url: "tagihan/" + id,
             success: function (data) {
                 $('.item' + data['id']).remove();
-                $('tagihanItemModal').modal('hide');
+                $('#tagihanItemModal').modal('hide');
                 $('.toast').toast('show');
                 $('.toast-body').text("Berhasil menghapus tagihan no "+id);
             }

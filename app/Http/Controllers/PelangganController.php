@@ -47,8 +47,15 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        Pelanggan::create($request->all());
+        $pelanggan = new Pelanggan;
+        $pelanggan->username = $request->username; 
+        $pelanggan->password = bcrypt($request->password); 
+        $pelanggan->no_kwh = $request->no_kwh;
+        $pelanggan->nama = $request->nama;
+        $pelanggan->alamat = $request->alamat;
+        $pelanggan->tarif_id = $request->tarif_id;
+        $pelanggan->save();
+        // Pelanggan::create($request->all());
         Session::flash('msg', 'Berhasil menambahkan'.$request->nama);
         return redirect()->back();
     }
@@ -104,7 +111,8 @@ class PelangganController extends Controller
      */
     public function destroy($id)
     {
-        Pelanggan::find($id)->destroy($id);
+        $pel = Pelanggan::find($id);
+        $pel->delete($id);
         Session::flash('msg', 'Sukses menghapus pelanggan');
         return redirect()->route('pelanggan.index');
     }

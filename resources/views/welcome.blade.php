@@ -38,7 +38,7 @@
                             <span class="d-block mb-4">
                                 <i class="fas fa-bolt fa-4x" data-fa-mask="fas fa-circle" data-fa-transform="shrink-4"></i>
                             </span>                                    
-                            <p class="card-text">Nikmati Listrik Tanpa Beban dan Gunakan Dengan Bijak.</p>
+                            <p class="card-text">Nikmati Listrik dan Gunakan Dengan Bijak.</p>
                         </div>
                     </div>
                 </div>

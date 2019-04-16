@@ -39,12 +39,8 @@
                     <td scope="col">{{ $pelanggan->no_kwh }}</td>
                     <td scope="col">{{ $pelanggan->tarif->daya }}</td>
                     <td scope="col">
-                        <a class="btn btn-primary btn-block mb-2" href="{{ route('dataPenggunaan', $pelanggan->nama) }}"><i class="fas fa-eye"></i></a>
-                        <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger btn-block"><i class="fas fa-trash"></i></button>
-                        </form>
+                        <a class="btn btn-primary btn-block mb-2" href="{{ route('dataPenggunaan', $pelanggan->nama) }}"><i class="fas fa-eye"></i></a>                        
+                        <a href="#deletePengguna" class="btn btn-danger btn-block btndelpeng" data-id="{{ $pelanggan->id }}" data-nama="{{ $pelanggan->nama }}"><i class="fas fa-trash"></i></button>
                     </td>
 
                 </tr>

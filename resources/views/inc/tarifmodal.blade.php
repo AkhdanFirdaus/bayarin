@@ -58,6 +58,30 @@
     </div>
 </form>
 
+<div class="modal fade" id="tarifDel" tabindex="-1" role="dialog" aria-labelledby="tarifDelTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tarifDelTitle">Tagihan Nomor <span class="badge badge-info" id="tagihanno"></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Hapus Tarif <span class="daya"></span>
+            </div>
+            <div class="modal-footer">
+                <form id="hapustar" method="POST">
+                    {{ csrf_field() }}
+                    {{ method_field("DELETE") }}
+                    <button type="submit" class="btn btn-danger"><i class="fas fa-trash"></i></button> 
+                </form>                
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('script')
 <script type="text/javascript">
     $(document).ready(function () {
@@ -69,6 +93,12 @@
             var id = data[2];
             $('#modalEdit').attr("action", "tarif/"+id);
         });
+        $('.deltrf').on('click', function () {
+            let id = $(this).data('id');
+            $('#hapustar').attr("action", 'tarif/'+id);
+            $('#tarifDel').modal('show');
+            $('.daya').text($(this).data('daya'));
+        })
     });
 </script>
 @endsection

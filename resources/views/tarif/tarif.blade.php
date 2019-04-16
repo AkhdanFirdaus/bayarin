@@ -34,17 +34,13 @@
             </thead>
             <tbody>
                 @foreach($tarifs as $index => $tarif)
-                <tr>
+                <tr class="item{{$tarif->id}}">
                     <td scope="col">{{ $index+1 }}</td>
                     <td scope="col">{{ $tarif->daya }}</td>
                     <td scope="col">Rp. {{ number_format($tarif->tarifperkwh) }}</td>
                     <td scope="col">
-                        <a href="#tarifEditModal" class="btn btn-warning btn-block mb-2 tarifedit" data-id="{{ $tarif->id }}" data-daya="{{ $tarif->daya }}" data-tarifperkwh="{{ $tarif->tarifperkwh }}"><i class="fas fa-pen"></i></a>
-                        <form action="{{ route('tarif.destroy', $tarif->id) }}" method="POST">
-                            {{ csrf_field() }}
-                            {{ method_field('DELETE') }}
-                            <button type="submit" class="btn btn-danger btn-block"><i class="fas fa-trash"></i></button>
-                        </form>
+                        <a href="#tarifEditModal" class="btn btn-warning tarifedit" data-id="{{ $tarif->id }}" data-daya="{{ $tarif->daya }}" data-tarifperkwh="{{ $tarif->tarifperkwh }}"><i class="fas fa-pen"></i></a>
+                        <a href="#tarifDel" data-id="{{$tarif->id}}" data-daya="{{$tarif->daya}}" class="btn btn-danger deltrf"><i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
                 @endforeach

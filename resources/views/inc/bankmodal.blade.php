@@ -1,5 +1,5 @@
 <div class="modal fade" id="dataPembayaran" tabindex="-1" role="dialog" aria-labelledby="dataPembayaranModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="dataPembayaranModal">Data Tagihan</h5>
@@ -20,15 +20,25 @@
                           </tr>
                       </thead>
                       <tbody>
+                          @if($pembayaran->count() > 0)
                           @foreach($pembayaran as $index => $pem)
                           <tr class="item{{$pem->id}}">
                               <td scope="col">{{ $index+1 }}</td>
                               <td scope="col">{{ \Carbon\Carbon::parse($pem->tanggal_pembayaran)->toFormattedDateString() }}</td>
                               <td scope="col">{{ $pem->bulan_bayar }}</td>
                               <td scope="col">Rp. {{ number_format($pem->total_bayar) }}</td>
+                              @if($pem->admin_id != null)
                               <td scope="col">{{ $pem->admin->nama }}</td>
+                              @else
+                              <td scope="col">Belum disahkan</td>
+                              @endif
                           </tr>
                           @endforeach
+                          @else
+                          <tr>
+                            <td colspan="5">Tidak ada data</td>
+                          </tr>
+                          @endif
                       </tbody>
                   </table>
               </div>
@@ -40,7 +50,7 @@
     </div>
 </div>
 <div class="modal fade" id="dataTagihan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Data Tagihan</h5>
@@ -62,6 +72,7 @@
                           </tr>
                       </thead>
                       <tbody>
+                          @if($tagihan->count() > 0)
                           @foreach($tagihan as $index => $tag)
                           <tr class="item{{$tag->id}}">
                               <td scope="col">{{ $index+1 }}</td>
@@ -80,6 +91,11 @@
                               </td>
                           </tr>
                           @endforeach
+                          @else
+                          <tr>
+                            <td colspan="5">Tidak ada data</td>
+                          </tr>
+                          @endif
                       </tbody>
                   </table>
               </div>

@@ -17,7 +17,7 @@ Route::post('{no_kwh}/pembayaran', 'Controller@bayarform')->name('bayarform');
 Route::post('{no_kwh}/pembayaran/bayarSemua', 'PembayaranController@store')->name('pembayaran.bayarSemua');
 Route::post('{no_kwh}/pembayaran/bayarBank', 'PembayaranController@bayarBank')->name('pembayaran.bayarBank');
 Route::post('{no_kwh}/pembayaran/bayarTunai', 'PembayaranController@bayarTunai')->name('pembayaran.bayarTunai');
-Route::post('{no_kwh}/pembayaran/btnbayarpertagihan', 'PembayaranController@bayarPerTagihan')->name('pembayaran.bayarpertagihan');
+Route::post('{no_kwh}/pembayaran/bayarpertagihan', 'PembayaranController@bayarPerTagihan')->name('pembayaran.bayarpertagihan');
 Route::post('{no_kwh}/riwayatbayar', 'Controller@riwayatbayar')->name('riwayatbayar');
 Route::get('exitSess', 'Controller@exitSession')->name('exitSess');
 
